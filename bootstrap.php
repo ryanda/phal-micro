@@ -5,6 +5,12 @@ require __DIR__ . '/vendor/autoload.php';
 use Phalcon\Mvc\Micro;
 
 /*
+ * Load .env file
+ */
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+/*
  * Read the configuration
  */
 $config = include __DIR__ . '/config/config.php';
