@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.2 <8.0",
         "vlucas/phpdotenv": "^4.1"
     },
     "autoload": {
@@ -25,5 +25,9 @@
     },
     "require-dev": {
         "phalcon/dd": "^1.1"
+    },
+    "support": {
+        "issues": "https://github.com/ryanda/phal-micro/issues",
+        "source": "https://github.com/ryanda/phal-micro",
     }
 }
