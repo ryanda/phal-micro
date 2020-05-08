@@ -28,3 +28,30 @@ $app->notFound(function () use ($app) {
         ->setJsonContent($response);
     return $json->send();
 });
+
+/**
+ * Error handler
+ */
+$app->error(
+    function (\Throwable $e) use ($app) {
+        $code = 500;
+
+        if ($e instanceof \Error) {
+            $message = sprintf('An error has occurred: %s', $e->getMessage());
+        } else {
+            $message = $e->getMessage();
+        }
+
+        $response = [
+            'success' => false,
+            'code' => $code,
+            'message' => $message,
+            'data' => [],
+        ];
+
+        $json = $app->response
+            ->setStatusCode($code, $response['message'])
+            ->setJsonContent($response);
+        return $json->send();
+    }
+);
