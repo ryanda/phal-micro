@@ -9,5 +9,6 @@ Use latest Phalcon (v4) as Micro framework
 ## Things To-Do
 - [x] Routing
 - [x] Config via .env
+- [x] Docker
+- [x] Isolate index.php
 - [ ] Database
-- [ ] Docker
