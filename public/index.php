@@ -4,12 +4,7 @@ header('Content-Type: application/json');
 
 try {
 
-    $app = include __DIR__ . '/../bootstrap.php';
-
-    /**
-     * Include Application.
-     */
-    include __DIR__ . '/../routes/api.php';
+    $app = include __DIR__ . '/../bootstrap/app.php';
 
     /*
      * Handle the request
