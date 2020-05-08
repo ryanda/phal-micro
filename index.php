@@ -6,12 +6,10 @@ try {
 
     $app = include __DIR__ . '/bootstrap.php';
 
-    $app->get(
-        '/',
-        function () {
-            echo "Hello world!";
-        }
-    );
+    /**
+     * Include Application.
+     */
+    include __DIR__ . '/routes/api.php';
 
     /*
      * Handle the request
