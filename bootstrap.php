@@ -10,7 +10,7 @@ $config = include __DIR__ . '/config.php';
 /**
  * Include Autoloader.
  */
-include __DIR__ . '/../config/loader.php';
+include __DIR__ . '/loader.php';
 
 include __DIR__ . '/service.php';
 
