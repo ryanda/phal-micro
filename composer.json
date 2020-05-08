@@ -21,5 +21,8 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "require-dev": {
+        "phalcon/dd": "^1.1"
     }
 }
