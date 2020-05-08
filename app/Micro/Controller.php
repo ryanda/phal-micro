@@ -11,7 +11,7 @@ class Controller extends BaseController
 
     public function index()
     {
-        $name = 'Hello world';
+        $name = $this->config->application->name;
         $response = sprintf('%s at %s', $name, date('Y-m-d H:i:s'));
 
         $this->buildResponse($response, Controller::SUCCESS_TRUE);
