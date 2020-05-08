@@ -23,6 +23,14 @@ $app->notFound(function () use ($app) {
         'data' => [],
     ];
 
+    if (APPLICATION_ENV === 'development') {
+        $response['payload'] = [
+            'uri' => $app['request']->getURI(),
+            'query_param' => $_GET,
+            'form_data' => $_POST,
+        ];
+    }
+
     $json = $app->response
         ->setStatusCode($code, $response['message'])
         ->setJsonContent($response);
@@ -48,6 +56,17 @@ $app->error(
             'message' => $message,
             'data' => [],
         ];
+
+        if (APPLICATION_ENV === 'development') {
+            $response['payload'] = [
+                'file' => basename($e->getFile()),
+                'path' => $e->getFile(),
+                'line' => $e->getLine(),
+                'query_param' => $_GET,
+                'form_data' => $_POST,
+                // 'trace' => $e->getTrace(),
+            ];
+        }
 
         $json = $app->response
             ->setStatusCode($code, $response['message'])
