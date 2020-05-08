@@ -2,6 +2,11 @@
 
 use Phalcon\Mvc\Micro;
 
+/*
+ * Read the configuration
+ */
+$config = include __DIR__ . '/config.php';
+
 /**
  * Include Autoloader.
  */
