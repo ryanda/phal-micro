@@ -1,0 +1,15 @@
+version: '3'
+phal-micro:
+  nginx:
+    image: nginx:mainline-alpine
+    restart: always
+    ports:
+      - '8000:80'
+    volumes:
+      - ./nginx_conf:/etc/nginx/conf.d
+      - ./:/usr/src/app
+  phalcon:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    restart: always
