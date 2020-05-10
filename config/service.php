@@ -10,3 +10,6 @@ $di->setShared(
         return $config;
     }
 );
+
+$di->setShared('auth_user', null);
+
