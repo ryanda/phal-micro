@@ -2,32 +2,33 @@
 
 namespace App\Services;
 
-use App\Exceptions\JwtHeaderInvalidException;
-use Illuminate\Database\Eloquent\Model;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
-use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\ValidationData as JwtValidation;
+use App\User;
 use Phalcon\Di;
 use Phalcon\Helper\Str;
+use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\ValidationData as JwtValidation;
+use App\Exceptions\JwtHeaderInvalidException;
 
 class Auth
 {
-    public static function issueToken($userID)
+    public static function issueToken(User $user)
     {
         $app = self::getDI();
         $config = $app['config']->jwt->toArray();
 
+        $rand = Str::random(Str::RANDOM_ALPHA, 16);
         $time = time();
 
         $token = (new Builder())
             ->issuedBy($_SERVER['HTTP_HOST'])// Configures the issuer (iss claim)
-            ->identifiedBy(Str::random(Str::RANDOM_ALPHA, 16), true)// Configures the id (jti claim), replicating as a header item
+            ->identifiedBy($rand, true)// Configures the id (jti claim), replicating as a header item
             ->issuedAt($time)// Configures the time that the token was issue (iat claim)
             ->canOnlyBeUsedAfter($time)// Configures the time that the token can be used (nbf claim)
             ->expiresAt($time + $config['ttl'])// Configures the expiration time of the token (exp claim)
-            ->withClaim('sub', $userID)// Configures a new claim, called "sub"
+            ->withClaim('sub', $user->getKey())// Configures a new claim, called "sub"
             ->withClaim('rli', $time + $config['refresh_limit'])// Configures a new claim, informs the limit time for the token to be renewed. the refresh limit is based on ttl + limit (grace period)
             ->getToken(new Sha256(), new Key($config['secret'])); // Retrieves the generated token
 
@@ -45,7 +46,7 @@ class Auth
         $token = self::parse($token);
         $id = $token->getClaim('sub') ?? null; // get user id
 
-        $user = $id;
+        $user = User::find($id);
         if (is_null($user))
             throw new JwtHeaderInvalidException('User not found!');
 
