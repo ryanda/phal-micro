@@ -14,7 +14,7 @@ $app->before(new Authentication(GUEST_ROUTE));
  * Insert your Routes below
  */
 $index = new Collection();
-$index->setHandler(\App\Micro\Controller::class, true);
+$index->setHandler(\App\Micro\HomeEndpoint::class, true);
 $index->get('/', 'index');
 $app->mount($index);
 
