@@ -16,6 +16,12 @@ $app->before(new Authentication(GUEST_ROUTE));
 $index = new Collection();
 $index->setHandler(\App\Micro\HomeEndpoint::class, true);
 $index->get('/', 'index');
+$index->get('/user', 'user');
+$app->mount($index);
+
+$index = new Collection();
+$index->setHandler(\App\Micro\AuthEndpoint::class, true);
+$index->post('/auth', 'login');
 $app->mount($index);
 
 /**
