@@ -11,8 +11,16 @@ class AuthEndpoint extends Controller
     public function login()
     {
         $req = $this->request->get();
-        $email = $req['email'] ?? '';
-        $password = $req['password'] ?? '';
+        $validation = $this->validation->validate($req, [
+            'email'                 => 'required|email',
+            'password'              => 'required|min:6',
+        ]);
+
+        if ($validation->fails())
+            return $this->buildResponse($validation->errors()->all()[0], Controller::SUCCESS_FALSE);
+
+        $email = $req['email'];
+        $password = $req['password'];
 
         $user  = User::where('email', $email)->first();
         if (is_null($user))
