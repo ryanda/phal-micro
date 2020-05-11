@@ -4,6 +4,7 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Cache\CacheFactory;
 use Phalcon\Cache\AdapterFactory;
 use Phalcon\Storage\SerializerFactory;
+use Rakit\Validation\Validator;
 
 $di = new FactoryDefault();
 
@@ -50,5 +51,12 @@ $di->setShared(
         $cache = $cacheFactory->load($cacheOptions);
 
         return $cache;
+    }
+);
+
+$di->setShared(
+    'validation',
+    function () {
+        return new Validator;
     }
 );

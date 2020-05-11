@@ -12,6 +12,7 @@
         "ext-phalcon": "^4.0.0",
         "illuminate/database": "^7.10",
         "lcobucci/jwt": "^3.3",
+        "rakit/validation": "^1.2",
         "vlucas/phpdotenv": "^4.1"
     },
     "autoload": {
