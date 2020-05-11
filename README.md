@@ -3,8 +3,10 @@
 Use latest Phalcon (v4) as Micro framework
 
 ## Requirements
-- PHP 7.2
+- PHP 7.4
 - Composer
+- MariaDB 10.5
+- Redis
 
 ## Default creds for Login
 email `user@default.app` : password `user@default.app`
