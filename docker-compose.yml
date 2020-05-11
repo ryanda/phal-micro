@@ -34,6 +34,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD: 123123
       - MYSQL_DATABASE: 'db'
+    volumes:
+      - ./mysql_init:/docker-entrypoint-initdb.d
   redis:
     container_name: phal-test-redis
     image: redis:6-alpine
