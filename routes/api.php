@@ -1,13 +1,14 @@
 <?php
 
 use Phalcon\Mvc\Micro\Collection;
+use App\Middlewares\Authentication;
 
 //Allowed token
 const GUEST_ROUTE = [
     '/',
     '/auth',
 ];
-$app->before(new Authentication());
+$app->before(new Authentication(GUEST_ROUTE));
 
 /**
  * Insert your Routes below
