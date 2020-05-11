@@ -13,14 +13,14 @@ $dotenv->load();
 /*
  * Read the configuration
  */
-$config = include __DIR__ . '/config/config.php';
+$config = include __DIR__ . '/../config/config.php';
 
 /**
  * Include Autoloader.
  */
-include __DIR__ . '/config/loader.php';
+include __DIR__ . '/../config/loader.php';
 
-include __DIR__ . '/config/service.php';
+include __DIR__ . '/../config/service.php';
 
 /*
  * Starting the application
