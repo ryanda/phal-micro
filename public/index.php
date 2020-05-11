@@ -1,7 +1,5 @@
 <?php
 
-header('Content-Type: application/json');
-
 try {
 
     $app = include __DIR__ . '/../bootstrap/app.php';
@@ -36,8 +34,7 @@ try {
         ];
     }
 
-    $json = $app->response
-        ->setStatusCode($code, $response['message'])
-        ->setJsonContent($response);
-    return $json->send();
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    die();
 }
