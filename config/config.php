@@ -27,4 +27,7 @@ $config = new Config();
 $configOverride = new Config(include_once __DIR__ . '/app.php');
 $config = $config->merge($configOverride);
 
+$configOverride = new Config(['database' => include_once __DIR__ . '/database.php']);
+$config = $config->merge($configOverride);
+
 return $config;
