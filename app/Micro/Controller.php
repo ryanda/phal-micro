@@ -9,6 +9,21 @@ class Controller extends BaseController
     const SUCCESS_TRUE = true;
     const SUCCESS_FALSE = false;
 
+    private function has($key)
+    {
+        return $this->cache->has($key);
+    }
+
+    private function get($key, $default = null)
+    {
+        return $this->cache->get($key, $default);
+    }
+
+    private function set($key, $data)
+    {
+        return $this->cache->set($key, $data);
+    }
+
     public function index()
     {
         $name = $this->config->application->name;
