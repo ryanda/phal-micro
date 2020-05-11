@@ -17,6 +17,7 @@ email `user@default.app` : password `user@default.app`
 - [x] Isolate index.php
 - [x] JWT
 - [x] Auth Middleware
-- [ ] Logging
+- [x] Logging
 - [x] Cache
-- [ ] Database
+- [x] Database
+- [x] Validation
