@@ -4,8 +4,10 @@ LABEL maintainer="ryanda <github.com/ryanda>"
 
 WORKDIR /usr/src/app
 
-RUN apk add --no-cache gcc musl-dev linux-headers
-RUN docker-php-ext-install pdo pdo_mysql mysqli && \
-    docker-php-ext-enable pdo pdo_mysql mysqli && \
+RUN apk add --no-cache gcc musl-dev linux-headers pcre-dev ${PHPIZE_DEPS} && \
+    docker-php-ext-install pdo_mysql mysqli && \
+    pecl channel-update pecl.php.net && pecl install msgpack redis && \
+    apk del pcre-dev ${PHPIZE_DEPS} && \
+    docker-php-ext-enable msgpack redis && \
     curl -sS https://getcomposer.org/installer | php -- \
     --install-dir=/usr/bin --filename=composer
