@@ -21,4 +21,9 @@ return [
             'prefix' => 'ph-strm-',
         ],
     ],
+    'jwt' => [
+        'secret' => getenv('JWT_SECRET') ?: 'defaultjwtsecret',
+        'ttl' => 60 * 24 * 30 * 12,
+        'refresh_limit' => 7200,
+    ],
 ];
