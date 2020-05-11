@@ -29,7 +29,7 @@ services:
       - 'redis'
   db:
     container_name: phal-test-sql
-    image: mariadb
+    image: mariadb:10
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD: 123123
