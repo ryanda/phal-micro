@@ -12,6 +12,8 @@ services:
     networks:
       - lemp-stack
       - bridge
+    depends_on:
+      - 'phalcon'
   phalcon:
     container_name: phal-test-fpm
     build: .
@@ -19,17 +21,21 @@ services:
     volumes:
       - ./:/usr/src/app
     links:
-    - 'redis:redis'
-    - 'db:mariadb'
+      - 'redis:redis'
+      - 'db:mariadb'
     networks:
       - lemp-stack
       - bridge
+    depends_on:
+      - 'db'
+      - 'redis'
   db:
     container_name: phal-test-sql
     image: mariadb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 123123
+      - MYSQL_ROOT_PASSWORD: 123123
+      - MYSQL_DATABASE: 'db'
   redis:
     container_name: phal-test-redis
     image: redis:6-alpine
