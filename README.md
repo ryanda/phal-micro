@@ -6,6 +6,9 @@ Use latest Phalcon (v4) as Micro framework
 - PHP 7.2
 - Composer
 
+## Default creds for Login
+email `user@default.app` : password `user@default.app`
+
 ## Things To-Do
 - [x] Routing
 - [x] Config via .env
