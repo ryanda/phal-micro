@@ -26,4 +26,5 @@ return [
         'ttl' => 60 * 24 * 30 * 12,
         'refresh_limit' => 7200,
     ],
+    'log' => APP_PATH . '/../storages/logs/' . 'applog_' . date('Ymd') . '.log',
 ];

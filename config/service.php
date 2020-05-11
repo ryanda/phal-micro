@@ -5,6 +5,8 @@ use Phalcon\Cache\CacheFactory;
 use Phalcon\Cache\AdapterFactory;
 use Phalcon\Storage\SerializerFactory;
 use Rakit\Validation\Validator;
+use Phalcon\Logger;
+use Phalcon\Logger\Adapter\Stream;
 
 $di = new FactoryDefault();
 
@@ -58,5 +60,25 @@ $di->setShared(
     'validation',
     function () {
         return new Validator;
+    }
+);
+
+$di->setShared(
+    'logger',
+    function () use ($config) {
+        $logConfig = $config->log;
+
+        if(!file_exists($logConfig))
+            touch($logConfig);
+
+        $adapter = new Stream($logConfig);
+        $logger  = new Logger(
+            'messages',
+            [
+                'main' => $adapter,
+            ]
+        );
+
+        return $logger;
     }
 );

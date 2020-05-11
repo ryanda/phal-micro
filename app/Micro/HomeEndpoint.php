@@ -14,6 +14,8 @@ class HomeEndpoint extends Controller
 
         $response = sprintf('%s at %s', $name, date('Y-m-d H:i:s'));
 
+        $this->logger->info('Hit at '.date('Y-m-d H:i:s'));
+
         $this->buildResponse($response, Controller::SUCCESS_TRUE);
     }
 
