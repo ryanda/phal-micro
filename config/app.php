@@ -17,7 +17,7 @@ return [
             'prefix' => 'ph-rds-',
         ],
         'stream' => [
-            'storageDir' => APP_PATH . '/storages/caches/',
+            'storageDir' => APP_PATH . '/../storages/caches/',
             'prefix' => 'ph-strm-',
         ],
     ],
