@@ -4,8 +4,9 @@ LABEL maintainer="ryanda <github.com/ryanda>"
 
 WORKDIR /usr/src/app
 
-RUN apk add --no-cache gcc musl-dev linux-headers pcre-dev ${PHPIZE_DEPS} && \
-    docker-php-ext-install pdo_mysql mysqli && \
+RUN apk add --no-cache gcc musl-dev linux-headers pcre-dev ${PHPIZE_DEPS}
+
+RUN docker-php-ext-install pdo_mysql mysqli && \
     pecl channel-update pecl.php.net && pecl install msgpack redis && \
     apk del pcre-dev ${PHPIZE_DEPS} && \
     docker-php-ext-enable msgpack redis && \
