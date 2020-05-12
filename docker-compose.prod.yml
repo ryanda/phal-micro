@@ -7,7 +7,6 @@ services:
       - '8000:80'
     volumes:
       - ./nginx_conf:/etc/nginx/conf.d
-      - ./:/usr/src/app
     links:
       - 'phalcon:php-fpm'
     networks:
@@ -15,10 +14,10 @@ services:
     depends_on:
       - 'phalcon'
   phalcon:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.production
     restart: always
-    volumes:
-      - ./:/usr/src/app
     links:
       - 'redis:redis'
       - 'db:mariadb'

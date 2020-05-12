@@ -11,3 +11,9 @@ RUN apk add --no-cache gcc musl-dev linux-headers pcre-dev ${PHPIZE_DEPS} && \
     pecl channel-update pecl.php.net && pecl install redis && \
     apk del pcre-dev ${PHPIZE_DEPS} && \
     docker-php-ext-enable redis
+
+COPY composer.json .
+RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
+
+COPY . .
+RUN composer dump-autoload --no-scripts --no-dev --optimize
