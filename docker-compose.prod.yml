@@ -1,0 +1,46 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:mainline-alpine
+    restart: always
+    ports:
+      - '8000:80'
+    volumes:
+      - ./nginx_conf:/etc/nginx/conf.d
+      - ./:/usr/src/app
+    links:
+      - 'phalcon:php-fpm'
+    networks:
+      - lemp-stack
+    depends_on:
+      - 'phalcon'
+  phalcon:
+    build: .
+    restart: always
+    volumes:
+      - ./:/usr/src/app
+    links:
+      - 'redis:redis'
+      - 'db:mariadb'
+    networks:
+      - lemp-stack
+    depends_on:
+      - 'db'
+      - 'redis'
+  db:
+    image: mariadb:10
+    restart: always
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: '123123'
+    volumes:
+      - ./mysql_init:/docker-entrypoint-initdb.d
+    networks:
+      - lemp-stack
+  redis:
+    image: redis:6-alpine
+    restart: always
+    networks:
+      - lemp-stack
+networks:
+  lemp-stack:
