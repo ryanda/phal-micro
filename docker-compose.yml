@@ -1,7 +1,6 @@
 version: '3'
 services:
   nginx:
-    container_name: phal-test-nginx
     image: nginx:mainline-alpine
     restart: always
     ports:
@@ -9,12 +8,13 @@ services:
     volumes:
       - ./nginx_conf:/etc/nginx/conf.d
       - ./:/usr/src/app
+    links:
+      - 'phalcon:php-fpm'
     networks:
       - lemp-stack
     depends_on:
       - 'phalcon'
   phalcon:
-    container_name: phal-test-fpm
     build: .
     restart: always
     volumes:
@@ -28,7 +28,6 @@ services:
       - 'db'
       - 'redis'
   db:
-    container_name: phal-test-sql
     image: mariadb:10
     restart: always
     environment:
@@ -36,8 +35,9 @@ services:
       MYSQL_ROOT_PASSWORD: '123123'
     volumes:
       - ./mysql_init:/docker-entrypoint-initdb.d
+    networks:
+      - lemp-stack
   redis:
-    container_name: phal-test-redis
     image: redis:6-alpine
     restart: always
     networks:
