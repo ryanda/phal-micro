@@ -15,7 +15,7 @@ email `user@default.app` : password `user@default.app`
 - [x] Routing
 - [x] Config via .env
 - [x] Docker Dev
-- [ ] Docker Production
+- [x] Docker Production
 - [x] Isolate index.php
 - [x] JWT
 - [x] Auth Middleware
