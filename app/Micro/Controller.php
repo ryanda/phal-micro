@@ -41,7 +41,7 @@ class Controller extends BaseController
         }
 
         $json = $this->response
-            ->setStatusCode($code, $response['message'])
+            ->setStatusCode((int) $response['code'], $response['message'])
             ->setJsonContent($response);
         return $json->send();
     }
