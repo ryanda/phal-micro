@@ -25,7 +25,9 @@ class Authentication implements MiddlewareInterface
 
     public function call(Micro $app)
     {
-        $currentEndpoint = str_replace(self::PREFIX_API, '', $app['request']->getURI());
+        $currentEndpoint = $app['request']->getURI(true);
+        if (self::PREFIX_API)
+            $currentEndpoint = str_replace(self::PREFIX_API, '', $currentEndpoint);
 
         // Bypass on guest endpoint
         if (in_array($currentEndpoint, $this->ignoreUri))
